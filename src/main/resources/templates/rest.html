@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../static/css/styl.css" th:href="@{/css/styl.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div id="content" align="center">
+    <h2>WELCOME TO OUR HAIR SALON</h2>
+    <div th:replace="fragments/logo :: logo"></div>
+
+    <div>
+        <a th:href="@{~/rest/users}" target="_blank">Users</a>
+    </div>
+    <div>
+        <a th:href="@{~/rest/hairdressers}" target="_blank">Hairdressers</a>
+    </div>
+    <div>
+        <a th:href="@{~/rest/hairdresserRatings}" target="_blank">Hairdresser Ratings</a>
+    </div>
+    <div>
+        <a th:href="@{~/rest/salons}" target="_blank">Salons</a>
+    </div>
+    <div>
+        <a th:href="@{~/rest/services}" target="_blank">Services</a>
+    </div>
+    <div>
+        <a th:href="@{~/rest/reservations}" target="_blank">Reservations</a>
+    </div>
+    <div>
+        <a th:href="@{~/rest/salonRatings}" target="_blank">Salon Ratings</a>
+    </div>
+
+    <br><br>
+    <div>
+        <a th:href="@{~/testowy}">Testowy</a>
+    </div>
+    <div>
+        <a th:href="@{~/testowy2}">Testowy2</a>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

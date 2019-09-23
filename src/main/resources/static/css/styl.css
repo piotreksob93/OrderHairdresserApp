@@ -1,0 +1,32 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+form {
+    width: 25%;
+}
+
+#content {
+    padding-bottom: 300px;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+#footer {
+    width: 100%;
+    background-color: #ffb741;
+    margin-top: 10px;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: limegreen;
+}
+

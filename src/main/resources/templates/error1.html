@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../static/css/styl.css" th:href="@{/css/styl.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div id="content" align="center" style="height: 250px">
+    <h2>WELCOME TO OUR HAIR SALON</h2>
+    <div th:replace="fragments/logo :: logo"></div>
+    <h3>COŚ POSZŁO NIE TAK...</h3>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

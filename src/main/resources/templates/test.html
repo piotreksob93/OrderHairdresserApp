@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../static/css/styl.css" th:href="@{/css/styl.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div id="content" align="center">
+    <h2>WELCOME TO OUR HAIR SALON</h2>
+    <div th:replace="fragments/logo :: logo"></div>
+    <h4>THIS IS LIST OF RESERVATIONS</h4>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Status
+        <th>Klient</th>
+        <th>Salon</th>
+        <th>Usługi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="temp : ${rezerwacje}">
+        <td th:text="${temp.getId()}"/>
+        <td th:text="${temp.getReservationDate()}"/>
+        <td th:text="${temp.getReservationStatus()}"/>
+        <td th:text="${temp.getClient().getFirstName()+' '+temp.getClient().getLastName()}"/>
+        <td th:text="${temp.getHairSalon().getSalonName()}"/>
+        <!--        <td>-->
+        <!--            <ul th:each="service : ${temp.getHairServices()}" th:remove="tag">-->
+        <!--                <li th:text="${service.getServiceName()}"/>-->
+        <!--            </ul>-->
+        <!--        </td>-->
+
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

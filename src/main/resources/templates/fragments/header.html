@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div align="right" th:fragment="header">
+    <div>
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                Jesteś zalogowany jako: <a th:href="@{~/#}" sec:authentication="name"/>
+                <input type="submit" value="(Wyloguj)" style="background: none;border: none; color: #0066ff;cursor: pointer"/>
+            </form>
+            <hr>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <a th:href="@{/showLogin}">Logowanie </a>|
+            <a th:href="@{/showRegistrationForm?userRole=client}">Rejestracja(Klient) </a>|
+            <a th:href="@{/showRegistrationForm?userRole=owner}">Rejestracja(Właściciel) </a>
+            <hr>
+        </div>
+    </div>
+</div>

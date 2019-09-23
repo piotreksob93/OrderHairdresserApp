@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../static/css/styl.css" th:href="@{/css/styl.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div id="content" align="center">
+    <h2>PANEL WŁAŚCIELA SALONU</h2>
+    <div th:replace="fragments/logo :: logo"></div>
+    <div style="height:250px;margin: auto">
+        <div>
+            DODAJ NOWY SALON FRYZJERSKI
+            <form th:action="@{/owner/processHairSalonAdd}" th:object="${hairSalonDto}" method="post">
+                <div class="form-group">
+                    <label> Salon Name : </label>
+                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <input type="text" th:field="*{salonName}" class="form-control" name="salonName"/>
+                </div>
+                <div class="form-group">
+                    <label> Salon City : </label>
+                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <input type="text" th:field="*{city}" class="form-control" name="city"/>
+                </div>
+                <div class="form-group">
+                    <label> Salon Street : </label>
+                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <input type="text" th:field="*{salonAddress}" class="form-control" name="salonAddress"/>
+                </div>
+                <div class="form-group">
+                    <label> Phone Number : </label>
+                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <input type="text" th:field="*{phoneNumber}" class="form-control" name="phoneNumber"/>
+                </div>
+                <input type="time"/>
+                <input type="date"/>
+                <div class="form-group">
+                    <input type="submit" value="Dodaj Salon"/>
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
