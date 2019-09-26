@@ -25,12 +25,11 @@ public class HairSalonServiceImplementation implements HairSalonService {
     @Override
     public void save(HairSalonDto hairSalonDto, Authentication authentication) {
         HairSalon hairSalon = new HairSalon();
-
         hairSalon.setSalonName(hairSalonDto.getSalonName());
         hairSalon.setSalonAddress(hairSalonDto.getSalonAddress());
         hairSalon.setPhoneNumber(hairSalonDto.getPhoneNumber());
         hairSalon.setCity(hairSalonDto.getCity());
-
+        hairSalon.setHairSalonOpeningHoursList(hairSalonDto.getHairSalonOpeningHoursList());
         User user = userRepo.findByUserName(authentication.getName());
         hairSalon.setUser(user);
 

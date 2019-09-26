@@ -37,19 +37,46 @@
                     <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
                     <input type="text" th:field="*{phoneNumber}" class="form-control" name="phoneNumber"/>
                 </div>
-                <input type="time"/>
-                <input type="date"/>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <td>Dzień</td>
+                        <td>Wybierz</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="dayOfWeek,itemStat: ${daysOfWeek.days}">
+                        <td><p th:text="${dayOfWeek.dayName}"></td>
+<!--                        <input type="hidden" th:field="${daysOfWeek.days[__${itemStat.index}__].dayName}"/>-->
+<!--                        <td><input type="checkbox" th:field="${daysOfWeek.days[__${itemStat.index}__].day}" th:value="${daysOfWeek.days[__${itemStat.index}__].day}" name="days"></td>-->
+                        <td><input type="checkbox" th:field="${daysOfWeek.days[__${itemStat.index}__].dayName}" th:value="${daysOfWeek.days[__${itemStat.index}__].dayName}"></td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <label>Godzina otwarcia salonu: </label>
+                    <input type="time" th:field="${openingHours.salonOpenHour}" class="time-input form-control"
+                           name="salonOpenHour"/>
+                </div>
+                <div class="form-group">
+                    <label>Godzina zamknięcia salonu: </label>
+                    <input type="time" th:field="${openingHours.salonCloseHour}" class="time-input form-control"
+                           name="salonCloseHour"/>
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Dodaj Salon"/>
                 </div>
             </form>
 
 
-
         </div>
     </div>
 </div>
 
-<div th:replace="fragments/footer :: footer"></div>
+<!--<div th:replace="fragments/footer :: footer"></div>-->
 </body>
 </html>

@@ -30,3 +30,7 @@ form {
     color: limegreen;
 }
 
+.time-input{
+    width: fit-content;
+}
+

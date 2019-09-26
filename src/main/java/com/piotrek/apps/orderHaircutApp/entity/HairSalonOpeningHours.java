@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.sql.Time;
 import java.util.List;
 
 @Entity
@@ -26,16 +25,16 @@ public class HairSalonOpeningHours {
     @Column(name = "hours_id")
     private int id;
 
-    @Column(name = "day")
-    private int day;
+    @Column(name = "dayName")
+    private String dayName;
 
-    @Column(name = "salon_open_hour",columnDefinition = "time")
-    private Time salonOpenHour;
+    @Column(name = "salon_open_hour", columnDefinition = "time")
+    private String salonOpenHour;
 
-    @Column(name = "salon_close_hour",columnDefinition = "time")
-    private Time salonCloseHour;
+    @Column(name = "salon_close_hour", columnDefinition = "time")
+    private String salonCloseHour;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinTable(name = "salon_hours",
             joinColumns = @JoinColumn(name = "hours_id", foreignKey = @ForeignKey(name = "HOURS_TO_HAIR_SALON_FK")),
             inverseJoinColumns = @JoinColumn(name = "salon_id"))
@@ -50,27 +49,27 @@ public class HairSalonOpeningHours {
         this.id = id;
     }
 
-    public int getDay() {
-        return day;
+    public String getDayName() {
+        return dayName;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setDayName(String dayName) {
+        this.dayName = dayName;
     }
 
-    public Time getSalonOpenHour() {
+    public String getSalonOpenHour() {
         return salonOpenHour;
     }
 
-    public void setSalonOpenHour(Time salonOpenHour) {
+    public void setSalonOpenHour(String salonOpenHour) {
         this.salonOpenHour = salonOpenHour;
     }
 
-    public Time getSalonCloseHour() {
+    public String getSalonCloseHour() {
         return salonCloseHour;
     }
 
-    public void setSalonCloseHour(Time salonCloseHour) {
+    public void setSalonCloseHour(String salonCloseHour) {
         this.salonCloseHour = salonCloseHour;
     }
 
@@ -86,9 +85,9 @@ public class HairSalonOpeningHours {
     public String toString() {
         return "HairSalonOpeningHours{" +
                 "id=" + id +
-                ", day=" + day +
-                ", salonOpenHour=" + salonOpenHour +
-                ", salonCloseHour=" + salonCloseHour +
+                ", dayName='" + dayName + '\'' +
+                ", salonOpenHour='" + salonOpenHour + '\'' +
+                ", salonCloseHour='" + salonCloseHour + '\'' +
                 '}';
     }
 }

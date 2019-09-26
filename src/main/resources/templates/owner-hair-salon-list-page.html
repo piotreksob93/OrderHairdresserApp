@@ -17,7 +17,7 @@
     <div align="right">
         <a class="button btn btn-primary" th:href="@{/owner/showSalonAddPage}">Nowy salon</a>
     </div>
-    <table class="table table-bordered table-striped" width="70%">
+    <table class="table table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
             <th>Id</th>
@@ -25,6 +25,7 @@
             <th>Miasto</th>
             <th>Adres</th>
             <th>Numer</th>
+            <th>Godziny otwarcia</th>
         </tr>
         </thead>
         <tbody>
@@ -34,8 +35,11 @@
             <td th:text="${temp.getCity()}"/>
             <td th:text="${temp.getSalonAddress()}"/>
             <td th:text="${temp.getPhoneNumber()}"/>
-
-
+            <td>
+                <ul th:each="hour:${temp.getHairSalonOpeningHoursList()}">
+                    <li th:text="${hour.dayName +' : '+ hour.salonOpenHour + '-' + hour.salonCloseHour}"></li>
+                </ul>
+            </td>
         </tr>
         </tbody>
     </table>
