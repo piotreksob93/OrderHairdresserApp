@@ -17,24 +17,24 @@
     <div align="right">
         <a class="button btn btn-primary" th:href="@{/owner/showSalonAddPage}">Nowy salon</a>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-sm table-bordered table-striped">
         <thead class="thead-dark">
         <tr>
-            <th>Id</th>
             <th>Nazwa</th>
             <th>Miasto</th>
             <th>Adres</th>
             <th>Numer</th>
+            <th>Akcje</th>
             <th>Godziny otwarcia</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="temp : ${hairSalons}">
-            <td th:text="${temp.getId()}"/>
             <td th:text="${temp.getSalonName()}"/>
             <td th:text="${temp.getCity()}"/>
             <td th:text="${temp.getSalonAddress()}"/>
             <td th:text="${temp.getPhoneNumber()}"/>
+            <td/>
             <td>
                 <ul th:each="hour:${temp.getHairSalonOpeningHoursList()}">
                     <li th:text="${hour.dayName +' : '+ hour.salonOpenHour + '-' + hour.salonCloseHour}"></li>

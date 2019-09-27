@@ -84,7 +84,7 @@ public class OwnerController {
 
     @Transactional
     @GetMapping("/showOwnerSalons")
-    public String showOWnerSalons(Model model, Authentication authentication) {
+    public String showOwnerSalons(Model model, Authentication authentication) {
 
         User user = userService.findByUserName(authentication.getName());
 

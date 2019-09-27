@@ -41,13 +41,13 @@ VALUES
 (3, 'Wrocław', 'Tępe nożyce', 'Grzybowa 9', '852 741 963',9);
 
 
-INSERT INTO salons_users(salon_id,user_id)
-VALUES
-(1,2),
-(1,3),
-(2,2),
-(2,4),
-(3,5);
+-- INSERT INTO salons_users(salon_id,user_id)
+-- VALUES
+-- (1,2),
+-- (1,3),
+-- (2,2),
+-- (2,4),
+-- (3,5);
 
 INSERT INTO `hair_salon`.`salon_rating` (`rating_id`, `rating`, `opinion`,`user_id`,`salon_id`)
 VALUES
