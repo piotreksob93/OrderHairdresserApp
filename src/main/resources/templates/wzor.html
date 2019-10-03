@@ -10,19 +10,11 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div id="content" align="center">
-    <h2>PANEL WŁAŚCICIELA SALONU</h2>
-    <div th:replace="fragments/logo :: logo"></div>
-    <div style="height:250px;margin: auto">
-        <div>
-            <a th:href="@{/owner/showSalonAddPage}" class="button btn btn-primary">Nowy salon</a>
-        </div>
-        <div>
-            <a th:href="@{/owner/showOwnerSalons}" class="button btn btn-primary">Twoje salony</a>
-        </div>
-    </div>
-</div>
 
+<div id="content" align="center" style="height: 250px">
+    <h2>TYTUŁ</h2>
+    <div th:replace="fragments/logo :: logo"></div>
+</div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

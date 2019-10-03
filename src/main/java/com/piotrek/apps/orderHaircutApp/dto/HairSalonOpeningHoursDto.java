@@ -1,13 +1,21 @@
 package com.piotrek.apps.orderHaircutApp.dto;
 
+import com.piotrek.apps.orderHaircutApp.enums.Days;
+
+import javax.validation.constraints.NotNull;
+
 public class HairSalonOpeningHoursDto {
 
     private int id;
 
     private String dayName;
 
+    private Enum<Days> dayNameForm;
+
+    @NotNull(message = "pole wymagane")
     private String salonOpenHour;
 
+    @NotNull(message = "pole wymagane")
     private String salonCloseHour;
 
     public int getId() {
@@ -24,6 +32,14 @@ public class HairSalonOpeningHoursDto {
 
     public void setDayName(String dayName) {
         this.dayName = dayName;
+    }
+
+    public Enum<Days> getDayNameForm() {
+        return dayNameForm;
+    }
+
+    public void setDayNameForm(Enum<Days> dayNameForm) {
+        this.dayNameForm = dayNameForm;
     }
 
     public String getSalonOpenHour() {

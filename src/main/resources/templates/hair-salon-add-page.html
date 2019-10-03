@@ -15,29 +15,41 @@
     <div th:replace="fragments/logo :: logo"></div>
     <div style="height:250px;margin: auto">
         <div>
-            DODAJ NOWY SALON FRYZJERSKI
+            <h4>WYPEŁNIJ DANE SALONU FRYZJERSKIEGO</h4>
             <form th:action="@{/owner/processHairSalonAdd}" th:object="${hairSalonDto}" method="post">
+                <input type="hidden" th:field="*{id}" class="form-control" name="id"/>
+
                 <div class="form-group">
                     <label> Salon Name : </label>
-                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <div class="error" th:if="${#fields.hasErrors('salonName')}" th:errors="*{salonName}">Salon Name
+                        Error
+                    </div>
                     <input type="text" th:field="*{salonName}" class="form-control" name="salonName"/>
                 </div>
                 <div class="form-group">
                     <label> Salon City : </label>
-                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <div class="error" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</div>
                     <input type="text" th:field="*{city}" class="form-control" name="city"/>
                 </div>
                 <div class="form-group">
                     <label> Salon Street : </label>
-                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <div class="error" th:if="${#fields.hasErrors('salonAddress')}" th:errors="*{salonAddress}">Salon
+                        Address Error
+                    </div>
                     <input type="text" th:field="*{salonAddress}" class="form-control" name="salonAddress"/>
                 </div>
                 <div class="form-group">
                     <label> Phone Number : </label>
-                    <!--                    <div th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">Username Error</div>-->
+                    <div class="error" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Phone
+                        Error
+                    </div>
                     <input type="text" th:field="*{phoneNumber}" class="form-control" name="phoneNumber"/>
                 </div>
 
+                <div class="error" th:if="${#fields.hasErrors('hairSalonOpeningHoursDtoList')}"
+                     th:errors="*{hairSalonOpeningHoursDtoList}">
+                    Salon Days Error
+                </div>
                 <table class="table table-sm table-bordered table-striped">
                     <thead>
                     <tr>
@@ -46,30 +58,53 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="dayOfWeek,itemStat: ${daysOfWeek.days}">
-                        <td><p th:text="${dayOfWeek.dayName}"></td>
-                        <!--                        <input type="hidden" th:field="${daysOfWeek.days[__${itemStat.index}__].dayName}"/>-->
-                        <!--                        <td><input type="checkbox" th:field="${daysOfWeek.days[__${itemStat.index}__].day}" th:value="${daysOfWeek.days[__${itemStat.index}__].day}" name="days"></td>-->
-                        <td><input type="checkbox" th:field="${daysOfWeek.days[__${itemStat.index}__].dayName}"
-                                   th:value="${daysOfWeek.days[__${itemStat.index}__].dayName}"></td>
+                    <tr th:each="dayOfWeek,itemStat: *{hairSalonOpeningHoursDtoList}">
+                        <td>
+                            <p th:text="${dayOfWeek.dayNameForm}">
+                        </td>
+                        <td>
+                            <input type="hidden" th:field="*{hairSalonOpeningHoursDtoList[__${itemStat.index}__].id}"
+                                   th:value="${dayOfWeek.id}"/>
+                            <p th:if="${dayOfWeek.dayName==null}">
+                                <input type="checkbox"
+                                       th:field="*{hairSalonOpeningHoursDtoList[__${itemStat.index}__].dayName}"
+                                       th:value="${dayOfWeek.dayNameForm}"/>
+                            </p>
+                            <p th:if="${dayOfWeek.dayName!=null}">
+                                <input type="checkbox"
+                                       th:field="*{hairSalonOpeningHoursDtoList[__${itemStat.index}__].dayName}"
+                                       th:value="${dayOfWeek.dayName}"/>
+                            </p>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
 
+                <div class="error" th:if="${hoursError!=null}" style="color: red">
+                    <p th:text="${hoursError}"/>
+                </div>
                 <div style="display: flex">
                     <div class="form-group">
                         <label>Godzina otwarcia salonu: </label>
-                        <input type="time" th:field="${openingHours.salonOpenHour}" class="time-input form-control"
+                        <div class="error" th:if="${#fields.hasErrors('salonOpenHour')}"
+                             th:errors="*{salonOpenHour}">
+                            Salon Open Hour Error
+                        </div>
+                        <input type="time" th:field="*{salonOpenHour}" class="time-input form-control"
                                name="salonOpenHour"/>
                     </div>
                     <div class="form-group">
                         <label>Godzina zamknięcia salonu: </label>
-                        <input type="time" th:field="${openingHours.salonCloseHour}" class="time-input form-control"
+                        <div class="error" th:if="${#fields.hasErrors('salonCloseHour')}"
+                             th:errors="*{salonCloseHour}">
+                            Salon Close Hour Error
+                        </div>
+                        <input type="time" th:field="*{salonCloseHour}" class="time-input form-control"
                                name="salonCloseHour"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Dodaj Salon"/>
+                    <input type="submit" value="Zapisz Salon"/>
                 </div>
             </form>
 

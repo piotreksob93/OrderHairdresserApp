@@ -44,19 +44,19 @@ public class HairSalon {
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "hairSalon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hairSalon", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.PERSIST})
     @JsonIgnore
     private List<Reservation> reservations;
 
-    @OneToMany(mappedBy = "hairSalon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hairSalon", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.PERSIST})
     @JsonIgnore
     private List<SalonRating> salonRatings;
 
-    @OneToMany(mappedBy = "hairSalon", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hairSalon", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.PERSIST})
     @JsonIgnore
     private List<Hairdresser> hairdressers;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(name = "salons_services",
             joinColumns = @JoinColumn(name = "salon_id", foreignKey = @ForeignKey(name = "SALON_TO_SALONS_SERVICES_FK")),
             inverseJoinColumns = @JoinColumn(name = "service_id"))
@@ -109,8 +109,8 @@ public class HairSalon {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumer) {
-        this.phoneNumber = phoneNumer;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public User getUser() {
@@ -167,6 +167,7 @@ public class HairSalon {
                 "id=" + id +
                 ", salonName='" + salonName + '\'' +
                 ", salonAddress='" + salonAddress + '\'' +
+                ", city='" + city + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }

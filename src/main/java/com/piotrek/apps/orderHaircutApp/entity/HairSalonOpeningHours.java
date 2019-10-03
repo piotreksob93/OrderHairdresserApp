@@ -18,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "hair_salon_opening_hours")
-public class HairSalonOpeningHours {
+public class HairSalonOpeningHours implements Comparable<HairSalonOpeningHours> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class HairSalonOpeningHours {
     @Column(name = "salon_close_hour", columnDefinition = "time")
     private String salonCloseHour;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH,CascadeType.REFRESH,CascadeType.PERSIST})
     @JoinTable(name = "salon_hours",
             joinColumns = @JoinColumn(name = "hours_id", foreignKey = @ForeignKey(name = "HOURS_TO_HAIR_SALON_FK")),
             inverseJoinColumns = @JoinColumn(name = "salon_id"))
@@ -89,5 +89,10 @@ public class HairSalonOpeningHours {
                 ", salonOpenHour='" + salonOpenHour + '\'' +
                 ", salonCloseHour='" + salonCloseHour + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(HairSalonOpeningHours o) {
+        return this.id-o.id;
     }
 }

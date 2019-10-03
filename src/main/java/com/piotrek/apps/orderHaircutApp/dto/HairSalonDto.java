@@ -1,25 +1,43 @@
 package com.piotrek.apps.orderHaircutApp.dto;
 
-import com.piotrek.apps.orderHaircutApp.entity.HairSalonOpeningHours;
 import com.piotrek.apps.orderHaircutApp.entity.HairService;
 import com.piotrek.apps.orderHaircutApp.entity.Hairdresser;
 import com.piotrek.apps.orderHaircutApp.entity.Reservation;
 import com.piotrek.apps.orderHaircutApp.entity.SalonRating;
 import com.piotrek.apps.orderHaircutApp.entity.User;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HairSalonDto {
 
     private int id;
 
+    @NotNull(message = "pole wymagane")
+    @Size(min = 1, message = "pole wymagane")
     private String salonName;
 
+    @NotNull(message = "pole wymagane")
+    @Size(min = 1, message = "pole wymagane")
     private String salonAddress;
 
+    @NotNull(message = "pole wymagane")
+    @Size(min = 1, message = "pole wymagane")
     private String city;
 
+    @NotNull(message = "pole wymagane")
+    @Size(min = 1, message = "pole wymagane")
+    @Pattern(regexp = "^\\d{3}[ ]?\\d{3}[ ]?\\d{3}", message = "Podaj prawidłowy numer telefonu")
     private String phoneNumber;
+
+    @NotNull(message = "pole wymagane")
+    private String salonOpenHour;
+
+    @NotNull(message = "pole wymagane")
+    private String salonCloseHour;
 
     private User user;
 
@@ -31,7 +49,15 @@ public class HairSalonDto {
 
     private List<HairService> hairServices;
 
-    private List<HairSalonOpeningHours> hairSalonOpeningHoursList;
+    private List<HairSalonOpeningHoursDto> hairSalonOpeningHoursDtoList;
+
+    public HairSalonDto() {
+        hairSalonOpeningHoursDtoList = new ArrayList<>();
+    }
+
+    public void addDay(HairSalonOpeningHoursDto day) {
+        hairSalonOpeningHoursDtoList.add(day);
+    }
 
     public int getId() {
         return id;
@@ -71,6 +97,22 @@ public class HairSalonDto {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getSalonOpenHour() {
+        return salonOpenHour;
+    }
+
+    public void setSalonOpenHour(String salonOpenHour) {
+        this.salonOpenHour = salonOpenHour;
+    }
+
+    public String getSalonCloseHour() {
+        return salonCloseHour;
+    }
+
+    public void setSalonCloseHour(String salonCloseHour) {
+        this.salonCloseHour = salonCloseHour;
     }
 
     public User getUser() {
@@ -113,11 +155,11 @@ public class HairSalonDto {
         this.hairServices = hairServices;
     }
 
-    public List<HairSalonOpeningHours> getHairSalonOpeningHoursList() {
-        return hairSalonOpeningHoursList;
+    public List<HairSalonOpeningHoursDto> getHairSalonOpeningHoursDtoList() {
+        return hairSalonOpeningHoursDtoList;
     }
 
-    public void setHairSalonOpeningHoursList(List<HairSalonOpeningHours> hairSalonOpeningHoursList) {
-        this.hairSalonOpeningHoursList = hairSalonOpeningHoursList;
+    public void setHairSalonOpeningHoursDtoList(List<HairSalonOpeningHoursDto> hairSalonOpeningHoursDtoList) {
+        this.hairSalonOpeningHoursDtoList = hairSalonOpeningHoursDtoList;
     }
 }

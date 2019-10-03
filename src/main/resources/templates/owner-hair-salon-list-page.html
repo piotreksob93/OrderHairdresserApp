@@ -14,10 +14,10 @@
     <h2>WELCOME TO OUR HAIR SALON</h2>
     <div th:replace="fragments/logo :: logo"></div>
     <h4>THIS IS LIST OF HAIR SALONS</h4>
-    <div align="right">
+    <div style="text-align: center">
         <a class="button btn btn-primary" th:href="@{/owner/showSalonAddPage}">Nowy salon</a>
     </div>
-    <table class="table table-sm table-bordered table-striped">
+    <table class="table table-sm table-bordered table-striped" style="width: 70%">
         <thead class="thead-dark">
         <tr>
             <th>Nazwa</th>
@@ -30,11 +30,23 @@
         </thead>
         <tbody>
         <tr th:each="temp : ${hairSalons}">
-            <td th:text="${temp.getSalonName()}"/>
-            <td th:text="${temp.getCity()}"/>
-            <td th:text="${temp.getSalonAddress()}"/>
-            <td th:text="${temp.getPhoneNumber()}"/>
-            <td/>
+            <td th:text="${temp.getSalonName()}"></td>
+            <td th:text="${temp.getCity()}"></td>
+            <td th:text="${temp.getSalonAddress()}"></td>
+            <td th:text="${temp.getPhoneNumber()}"></td>
+            <td>
+                <div align="center">
+                    <div>
+                        <a class="button btn btn-danger" th:href="@{/owner/deleteSalon?id={id}(id=${temp.getId()})}">Usuń</a>
+                    </div>
+                    <div>
+                        <a class="button btn btn-warning" th:href="@{/owner/editSalon?id={id}(id=${temp.getId()})}">Edytuj</a>
+                    </div>
+                    <div>
+                        <a class="button btn btn-success" th:href="@{/#}">Zarządzaj</a>
+                    </div>
+                </div>
+            </td>
             <td>
                 <ul th:each="hour:${temp.getHairSalonOpeningHoursList()}">
                     <li th:text="${hour.dayName +' : '+ hour.salonOpenHour + '-' + hour.salonCloseHour}"></li>
