@@ -37,13 +37,13 @@
             <td>
                 <div align="center">
                     <div>
-                        <a class="button btn btn-danger" th:href="@{/owner/deleteSalon?id={id}(id=${temp.getId()})}">Usuń</a>
+                        <a class="button btn btn-success" th:field="${temp}" th:href="@{/owner/manageSalon?id={id}(id=${temp.getId()})}">Zarządzaj</a>
                     </div>
                     <div>
                         <a class="button btn btn-warning" th:href="@{/owner/editSalon?id={id}(id=${temp.getId()})}">Edytuj</a>
                     </div>
                     <div>
-                        <a class="button btn btn-success" th:href="@{/#}">Zarządzaj</a>
+                        <a class="button btn btn-danger" th:href="@{/owner/deleteSalon?id={id}(id=${temp.getId()})}">Usuń</a>
                     </div>
                 </div>
             </td>

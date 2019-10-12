@@ -20,11 +20,14 @@ INSERT INTO user (user_id,email,password,username,first_name,last_name) VALUES
 (10,'piotreksob93@gmail.com','$2a$10$1eHcsFWmK.KHlKeeW1s6OONO7v2qRT5r5BaqHmJSqFlOrG1QOpS/y','piotrek','Piotr','Sobiborowicz');
 
 
-INSERT INTO `hairdresser` (`hairdresser_id`, `first_name`, `last_name`, `work_days`, `work_hours`,`salon_id`)
+INSERT INTO `hairdresser` (`hairdresser_id`, `first_name`, `last_name`, `salon_id`)
 VALUES
-(1, 'Hary', 'Style', '8:00-16:00', 'PN-PT',1),
-(2, 'Mary', 'Scizors', '10:00-18:00', 'PN-PT',2),
-(3, 'Gary', 'Spray', '8:00-16:00', 'PN-PT',3);
+(1, 'Hary', 'Style',1),
+(2, 'Adam', 'Scizors', 2),
+(3, 'Lucy', 'Spray', 3),
+(4, 'Bary', 'Style',1),
+(5, 'Gary', 'Style',1),
+(6, 'Mary', 'Style',1);
 
 
 INSERT INTO `hair_salon`.`hair_service` (`service_id`, `service_name`, `execution_time`, `price`)

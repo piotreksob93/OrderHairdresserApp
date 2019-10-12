@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="../static/css/styl.css" th:href="@{/css/styl.css}" rel="stylesheet"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div id="content" align="center">
+    <h2>DODAJ FRYZJERA</h2>
+    <div th:replace="fragments/logo :: logo"></div>
+    <form th:action="@{/owner/processHairdresserAdd}" th:object="${hairdresserDto}" method="post" style="width: 25%">
+<!--        <input type="hidden" th:field="*{hairSalon}"/>-->
+        <div class="form-group">
+            <label> First Name : </label>
+            <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</div>
+            <input type="text" th:field="*{firstName}" class="form-control" name="firstName"/>
+        </div>
+        <div class="form-group">
+            <label> Last Name : </label>
+            <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</div>
+            <input type="text" th:field="*{lastName}" class="form-control" name="lastName"/>
+        </div>
+        <input type="hidden" th:field="*{hairSalon.id}"/>
+        <div class="form-group">
+            <input type="submit" value="Dodaj"/>
+        </div>
+    </form>
+
+</div>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

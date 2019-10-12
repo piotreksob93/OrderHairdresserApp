@@ -33,17 +33,11 @@ public class Hairdresser {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "work_hours")
-    private String workHours;
-
-    @Column(name = "work_days")
-    private String workDays;
-
-    @OneToMany(mappedBy = "hairdresser", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hairdresser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<HairdresserRating> hairdresserRatings;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "salon_id", foreignKey = @ForeignKey(name = "HAIR_SALON_TO_HAIRDRESSER_FK"))
     @JsonIgnore
     private HairSalon hairSalon;
@@ -55,9 +49,13 @@ public class Hairdresser {
     @JsonIgnore
     private List<HairService> hairServices;
 
-    @OneToMany(mappedBy = "hairdresser" ,fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "hairdresser", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JsonIgnore
     private List<HairServiceOnReservation> hairServiceOnReservations;
+
+    @OneToMany(mappedBy = "hairdresser", fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonIgnore
+    private List<HairdresserWorkHours> hairdresserWorkHours;
 
     public Hairdresser() {
     }
@@ -84,22 +82,6 @@ public class Hairdresser {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getWorkHours() {
-        return workHours;
-    }
-
-    public void setWorkHours(String workHours) {
-        this.workHours = workHours;
-    }
-
-    public String getWorkDays() {
-        return workDays;
-    }
-
-    public void setWorkDays(String workDays) {
-        this.workDays = workDays;
     }
 
     public List<HairdresserRating> getHairdresserRatings() {
@@ -134,14 +116,20 @@ public class Hairdresser {
         this.hairServiceOnReservations = hairServiceOnReservations;
     }
 
+    public List<HairdresserWorkHours> getHairdresserWorkHours() {
+        return hairdresserWorkHours;
+    }
+
+    public void setHairdresserWorkHours(List<HairdresserWorkHours> hairdresserWorkHours) {
+        this.hairdresserWorkHours = hairdresserWorkHours;
+    }
+
     @Override
     public String toString() {
         return "Hairdresser{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", workHours='" + workHours + '\'' +
-                ", workDays='" + workDays + '\'' +
                 ", hairdresserRatings=" + hairdresserRatings +
                 ", hairSalon=" + hairSalon +
                 ", hairServices=" + hairServices +

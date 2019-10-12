@@ -11,9 +11,27 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 
-<div id="content" align="center" style="height: 250px">
-    <h2>TYTUŁ</h2>
+<div id="content" align="center">
+    <h2>ZARZĄDZAJ SWOIM SALONEM</h2>
     <div th:replace="fragments/logo :: logo"></div>
+    <div>
+        <h4>TUTAJ MOŻESZ ZARZĄDZAĆ SWOIM SALONEM FRYZJERSKIM</h4>
+        <div>
+            <a th:href="@{/owner/salonHairdressers?id={id}(id=${id})}" class="button btn btn-primary">Pracownicy salonu</a>
+        </div>
+        <div>
+            <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Rezerwacje w salonie</a>
+        </div>
+        <div>
+            <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Usługi salonu</a>
+        </div>
+        <div>
+            <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Oceny salonu</a>
+        </div>
+        <div>
+            <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Klienci salonu</a>
+        </div>
+    </div>
 </div>
 <div th:replace="fragments/footer :: footer"></div>
 </body>

@@ -2,12 +2,16 @@ package com.piotrek.apps.orderHaircutApp.controller;
 
 import com.piotrek.apps.orderHaircutApp.dto.HairSalonDto;
 import com.piotrek.apps.orderHaircutApp.dto.HairSalonOpeningHoursDto;
+import com.piotrek.apps.orderHaircutApp.dto.HairdresserDto;
 import com.piotrek.apps.orderHaircutApp.entity.HairSalon;
 import com.piotrek.apps.orderHaircutApp.entity.HairSalonOpeningHours;
+import com.piotrek.apps.orderHaircutApp.entity.Hairdresser;
+import com.piotrek.apps.orderHaircutApp.entity.HairdresserRating;
 import com.piotrek.apps.orderHaircutApp.entity.User;
 import com.piotrek.apps.orderHaircutApp.enums.Days;
 import com.piotrek.apps.orderHaircutApp.services.HairSalonOpeningHoursService;
 import com.piotrek.apps.orderHaircutApp.services.HairSalonService;
+import com.piotrek.apps.orderHaircutApp.services.HairdresserService;
 import com.piotrek.apps.orderHaircutApp.services.UserService;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.Authentication;
@@ -40,10 +44,13 @@ public class OwnerController {
 
     private final HairSalonOpeningHoursService hairSalonOpeningHoursService;
 
-    public OwnerController(HairSalonService hairSalonService, UserService userService, HairSalonOpeningHoursService hairSalonOpeningHoursService) {
+    private final HairdresserService hairdresserService;
+
+    public OwnerController(HairSalonService hairSalonService, UserService userService, HairSalonOpeningHoursService hairSalonOpeningHoursService, HairdresserService hairdresserService) {
         this.hairSalonService = hairSalonService;
         this.userService = userService;
         this.hairSalonOpeningHoursService = hairSalonOpeningHoursService;
+        this.hairdresserService = hairdresserService;
     }
 
     @GetMapping("/showOwnerPanel")
@@ -82,7 +89,7 @@ public class OwnerController {
             return "hair-salon-add-page";
         }
 
-        if(hairSalonDto.getSalonOpenHour().equals("") || hairSalonDto.getSalonCloseHour().equals("")){
+        if (hairSalonDto.getSalonOpenHour().equals("") || hairSalonDto.getSalonCloseHour().equals("")) {
             fillDaysForForm(hairSalonDto);
             model.addAttribute("hoursError", "Podaj prawidłowe godziny");
             return "hair-salon-add-page";
@@ -140,8 +147,6 @@ public class OwnerController {
     @GetMapping("/deleteSalon")
     @Transactional
     public String deleteHairSalon(@RequestParam(value = "id") int id) {
-//        HairSalon tempSalon = hairSalonService.get(id);
-//        hairSalonService.delete(tempSalon);
         hairSalonService.deleteById(id);
         return "redirect:/owner/showOwnerSalons";
     }
@@ -177,5 +182,63 @@ public class OwnerController {
         model.addAttribute("hairSalonDto", hairSalonDto);
 
         return "hair-salon-add-page";
+    }
+
+    @RequestMapping("/manageSalon")
+    public String showHairSalonManagePage(@RequestParam(value = "id") int id, Model model) {
+        model.addAttribute("id", id);
+        return "salon-management-page";
+    }
+
+    @Transactional
+    @RequestMapping("/salonHairdressers")
+    public String showHairSalonHairdressers(@RequestParam(value = "id") int id, Model model) {
+        HairSalon hairSalon = hairSalonService.get(id);
+        List<Hairdresser> hairdresserList = hairdresserService.findAllByHairSalon(hairSalon);
+        List<HairdresserDto> hairdresserDtoList = new ArrayList<>();
+        for (Hairdresser hairdresser : hairdresserList) {
+            HairdresserDto hairdresserDto = new HairdresserDto();
+            hairdresserDto.setId(hairdresser.getId());
+            hairdresserDto.setFirstName(hairdresser.getFirstName());
+            hairdresserDto.setLastName(hairdresser.getLastName());
+            List<HairdresserRating> ratings = hairdresser.getHairdresserRatings();
+            float sum = 0;
+            if (ratings.size() != 0) {
+                for (HairdresserRating rating : ratings) {
+                    sum += rating.getRating();
+                }
+                hairdresserDto.setAverageRating(sum / ratings.size());
+            } else {
+                hairdresserDto.setAverageRating(sum);
+            }
+            hairdresserDto.setHairdresserRatings(hairdresser.getHairdresserRatings());
+            hairdresserDto.setHairdresserRatings(hairdresser.getHairdresserRatings());
+            hairdresserDto.setHairSalon(hairdresser.getHairSalon());
+            hairdresserDto.setHairServiceOnReservations(hairdresser.getHairServiceOnReservations());
+            hairdresserDto.setHairServices(hairdresser.getHairServices());
+            hairdresserDtoList.add(hairdresserDto);
+        }
+
+        model.addAttribute("id", id);
+        model.addAttribute("salonName", hairSalon.getSalonName());
+        model.addAttribute("hairdresserDtoList", hairdresserDtoList);
+        return "hair-salon-hairdressers-list";
+    }
+
+    @RequestMapping("/addHairdresser")
+    public String showHairdresserAddPage(@RequestParam(value = "id") int id, Model model) {
+
+        Hairdresser hairdresser = new Hairdresser();
+        hairdresser.setHairSalon(hairSalonService.get(id));
+        model.addAttribute("hairdresserDto", hairdresser);
+        return "hairdresser-add-page";
+    }
+
+
+    @PostMapping("/processHairdresserAdd")
+    public String processHairdresserAdd(@ModelAttribute("hairdresserDto") HairdresserDto hairdresserDto) {
+        int id = hairdresserDto.getHairSalon().getId();
+        hairdresserService.save(hairdresserDto);
+        return "redirect:/owner/salonHairdressers?id=" + id;
     }
 }
