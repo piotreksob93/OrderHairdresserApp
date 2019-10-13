@@ -11,4 +11,8 @@ public interface HairdresserService {
     List<Hairdresser> findAllByHairSalon(HairSalon hairSalon);
 
     void save(HairdresserDto hairdresserDto);
+
+    Hairdresser getOne(int id);
+
+    void delete(Hairdresser hairdresser);
 }

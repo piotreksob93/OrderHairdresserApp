@@ -4,7 +4,6 @@ import com.piotrek.apps.orderHaircutApp.dao.RoleRepo;
 import com.piotrek.apps.orderHaircutApp.dto.UserDto;
 import com.piotrek.apps.orderHaircutApp.entity.User;
 import com.piotrek.apps.orderHaircutApp.services.UserServiceImplementation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,19 +23,19 @@ public class RegistrationController {
 
     private RoleRepo roleRepo;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserServiceImplementation userService, RoleRepo roleRepo) {
+    public RegistrationController(UserServiceImplementation userService, RoleRepo roleRepo, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleRepo = roleRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/showRegistrationForm")
     public String showUserRegistrationPage(@RequestParam(value = "userRole") String role, Model model) {
         model.addAttribute("userRole", role);
         model.addAttribute("userDto", new UserDto());
-        return "registration-page";
+        return "register/registration-page";
     }
 
     @PostMapping("/processRegistrationForm")
@@ -46,7 +45,7 @@ public class RegistrationController {
             @ModelAttribute("userRole") String role, Model theModel) {
 
         if (bindingResult.hasErrors()) {
-            return "registration-page";
+            return "register/registration-page";
         }
 
         String userName = userDto.getUserName();
@@ -57,7 +56,7 @@ public class RegistrationController {
             theModel.addAttribute("registrationError", "User name already exists.");
 
             System.out.println("User name already exists.");
-            return "registration-page";
+            return "register/registration-page";
         }
 
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -71,7 +70,7 @@ public class RegistrationController {
 
         System.out.println("Successfully created user: " + userName);
 
-        return "registration-confirmation";
+        return "register/registration-confirmation";
     }
 
 }

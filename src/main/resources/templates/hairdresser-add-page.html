@@ -14,8 +14,8 @@
 <div id="content" align="center">
     <h2>DODAJ FRYZJERA</h2>
     <div th:replace="fragments/logo :: logo"></div>
-    <form th:action="@{/owner/processHairdresserAdd}" th:object="${hairdresserDto}" method="post" style="width: 25%">
-<!--        <input type="hidden" th:field="*{hairSalon}"/>-->
+    <form th:action="@{/hairdresser/processHairdresserAdd}" th:object="${hairdresserDto}" method="post" style="width: 25%">
+        <input type="hidden" th:field="*{hairSalon.id}"/>
         <div class="form-group">
             <label> First Name : </label>
             <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</div>
@@ -26,7 +26,6 @@
             <div class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</div>
             <input type="text" th:field="*{lastName}" class="form-control" name="lastName"/>
         </div>
-        <input type="hidden" th:field="*{hairSalon.id}"/>
         <div class="form-group">
             <input type="submit" value="Dodaj"/>
         </div>

@@ -32,4 +32,16 @@ public class HairdresserServiceImplementation implements HairdresserService {
         hairdresser.setHairSalon(hairdresserDto.getHairSalon());
         hairdresserRepo.save(hairdresser);
     }
+
+    @Override
+    public Hairdresser getOne(int id) {
+        return hairdresserRepo.getOne(id);
+    }
+
+    @Override
+    public void delete(Hairdresser hairdresser) {
+        hairdresserRepo.delete(hairdresser);
+    }
+
+
 }

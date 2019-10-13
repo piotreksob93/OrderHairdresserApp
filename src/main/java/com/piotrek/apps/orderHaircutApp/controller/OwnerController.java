@@ -224,21 +224,4 @@ public class OwnerController {
         model.addAttribute("hairdresserDtoList", hairdresserDtoList);
         return "hair-salon-hairdressers-list";
     }
-
-    @RequestMapping("/addHairdresser")
-    public String showHairdresserAddPage(@RequestParam(value = "id") int id, Model model) {
-
-        Hairdresser hairdresser = new Hairdresser();
-        hairdresser.setHairSalon(hairSalonService.get(id));
-        model.addAttribute("hairdresserDto", hairdresser);
-        return "hairdresser-add-page";
-    }
-
-
-    @PostMapping("/processHairdresserAdd")
-    public String processHairdresserAdd(@ModelAttribute("hairdresserDto") HairdresserDto hairdresserDto) {
-        int id = hairdresserDto.getHairSalon().getId();
-        hairdresserService.save(hairdresserDto);
-        return "redirect:/owner/salonHairdressers?id=" + id;
-    }
 }
