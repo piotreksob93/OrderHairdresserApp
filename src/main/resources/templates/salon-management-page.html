@@ -17,13 +17,13 @@
     <div>
         <h4>TUTAJ MOŻESZ ZARZĄDZAĆ SWOIM SALONEM FRYZJERSKIM</h4>
         <div>
-            <a th:href="@{/owner/salonHairdressers?id={id}(id=${id})}" class="button btn btn-primary">Pracownicy salonu</a>
+            <a th:href="@{/hairsalon/salonHairdressers?id={id}(id=${id})}" class="button btn btn-primary">Pracownicy salonu</a>
         </div>
         <div>
             <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Rezerwacje w salonie</a>
         </div>
         <div>
-            <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Usługi salonu</a>
+            <a th:href="@{/hairsalon/salonServices?id={id}(id=${id})}" class="button btn btn-primary">Usługi salonu</a>
         </div>
         <div>
             <a th:href="@{/}" class="button btn btn-secondary" style="pointer-events: none">Oceny salonu</a>

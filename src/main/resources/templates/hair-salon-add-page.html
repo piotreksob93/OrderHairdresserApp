@@ -16,7 +16,7 @@
     <div style="height:250px;margin: auto">
         <div>
             <h4>WYPEŁNIJ DANE SALONU FRYZJERSKIEGO</h4>
-            <form th:action="@{/owner/processHairSalonAdd}" th:object="${hairSalonDto}" method="post">
+            <form th:action="@{/hairsalon/processHairSalonAdd}" th:object="${hairSalonDto}" method="post">
                 <input type="hidden" th:field="*{id}" class="form-control" name="id"/>
 
                 <div class="form-group">

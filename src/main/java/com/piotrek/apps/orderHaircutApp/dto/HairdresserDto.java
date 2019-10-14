@@ -6,14 +6,20 @@ import com.piotrek.apps.orderHaircutApp.entity.HairServiceOnReservation;
 import com.piotrek.apps.orderHaircutApp.entity.HairdresserRating;
 import com.piotrek.apps.orderHaircutApp.entity.HairdresserWorkHours;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class HairdresserDto {
 
     private int id;
 
+    @Size(min = 1, message = "pole wymagane")
+    @NotNull(message = "pole wymagane")
     private String firstName;
 
+    @Size(min = 1, message = "pole wymagane")
+    @NotNull(message = "pole wymagane")
     private String lastName;
 
     private List<HairdresserRating> hairdresserRatings;

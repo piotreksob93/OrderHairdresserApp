@@ -27,6 +27,7 @@ public class HairdresserServiceImplementation implements HairdresserService {
     @Transactional
     public void save(HairdresserDto hairdresserDto) {
         Hairdresser hairdresser = new Hairdresser();
+        hairdresser.setId(hairdresserDto.getId());
         hairdresser.setFirstName(hairdresserDto.getFirstName());
         hairdresser.setLastName(hairdresserDto.getLastName());
         hairdresser.setHairSalon(hairdresserDto.getHairSalon());

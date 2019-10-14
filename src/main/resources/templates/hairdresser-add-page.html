@@ -16,6 +16,8 @@
     <div th:replace="fragments/logo :: logo"></div>
     <form th:action="@{/hairdresser/processHairdresserAdd}" th:object="${hairdresserDto}" method="post" style="width: 25%">
         <input type="hidden" th:field="*{hairSalon.id}"/>
+        <input type="hidden" th:field="*{hairSalon.salonName}"/>
+        <input type="hidden" th:field="*{id}"/>
         <div class="form-group">
             <label> First Name : </label>
             <div class="error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</div>
@@ -27,7 +29,7 @@
             <input type="text" th:field="*{lastName}" class="form-control" name="lastName"/>
         </div>
         <div class="form-group">
-            <input type="submit" value="Dodaj"/>
+            <input type="submit" value="Zapisz"/>
         </div>
     </form>
 

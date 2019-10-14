@@ -12,40 +12,37 @@
 <div th:replace="fragments/header :: header"></div>
 
 <div align="center" id="content">
-    <h2>Pracownicy salonu <p>"<span th:text="${salonName}"></span>"</p></h2>
+    <h2>Usługi salonu <p>"<span th:text="${hairSalon.getSalonName()}"></span>"</p></h2>
     <div th:replace="fragments/logo :: logo"></div>
     <div style="text-align: center">
         <a class="button btn btn-primary" th:href="@{/hairdresser/addHairdresser?id={id}(id=${id})}">Dodaj pracownika</a>
     </div>
-    <div th:if="${hairdresserDtoList.size()!=0}">
+    <div th:if="${hairServices.size()!=0}">
         <table class="table table-sm table-bordered table-striped" style="width: 35%">
             <thead class="thead-dark">
             <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>Średnia ocena</th>
+                <th>Nazwa</th>
+                <th>Czas wykonania</th>
+                <th>Cena</th>
                 <th>Akcje</th>
             </tr>
             </thead>
-            <tbody align="center">
-            <tr th:each="temp : ${hairdresserDtoList}">
-                <td th:text="${temp.getFirstName()}"></td>
-                <td th:text="${temp.getLastName()}"></td>
-                <td th:text="${temp.getAverageRating()}"></td>
+            <tbody>
+            <tr th:each="temp : ${hairServices}">
+                <td th:text="${temp.getServiceName()}"></td>
+                <td th:text="${temp.getExecutionTime()}"></td>
+                <td th:text="${temp.getServicePrice()}"></td>
                 <td>
-                    <a class="button btn btn-danger" th:href="@{/hairdresser/deleteHairdresser?id={id}(id=${temp.getId()})}">
-                        <span class="glyphicon glyphicon-remove"></span>Usuń
-                    </a>
-                    <a class="button btn btn-warning" th:href="@{/hairdresser/editHairdresser?id={id}(id=${temp.getId()})}">
-                        <span class="glyphicon glyphicon-warning"></span>Edytuj
-                    </a>
+<!--                    <a class="button btn btn-danger" th:href="@{/hairdresser/deleteHairdresser?id={id}(id=${temp.getId()})}">-->
+<!--                        <span class="glyphicon glyphicon-remove"></span>Usuń-->
+<!--                    </a>-->
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div th:if="${hairdresserDtoList.size()==0}">
-        <h6>Brak pracowników</h6>
+    <div th:if="${hairServices.size()==0}">
+        <h6>Brak usług</h6>
     </div>
 
 </div>
