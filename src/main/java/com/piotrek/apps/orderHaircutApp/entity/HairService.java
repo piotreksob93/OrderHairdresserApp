@@ -2,19 +2,7 @@ package com.piotrek.apps.orderHaircutApp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -32,14 +20,14 @@ public class HairService {
     @Column(name = "price")
     private int servicePrice;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "salons_services",
             joinColumns = @JoinColumn(name = "service_id", foreignKey = @ForeignKey(name = "HAIR_SERVICE_TO_SALONS_SERVICES_FK")),
             inverseJoinColumns = @JoinColumn(name = "salon_id"))
     @JsonIgnore
     private List<HairSalon> hairSalon;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(name = "hairdresser_service",
             joinColumns = @JoinColumn(name = "service_id", foreignKey = @ForeignKey(name = "HAIR_SERVICE_TO_HAIRDRESSERS_SERVICES_FK")),
             inverseJoinColumns = @JoinColumn(name = "hairdresser_id"))

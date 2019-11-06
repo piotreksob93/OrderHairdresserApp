@@ -15,7 +15,8 @@
     <h2>Usługi salonu <p>"<span th:text="${hairSalon.getSalonName()}"></span>"</p></h2>
     <div th:replace="fragments/logo :: logo"></div>
     <div style="text-align: center">
-        <a class="button btn btn-primary" th:href="@{/hairdresser/addHairdresser?id={id}(id=${id})}">Dodaj pracownika</a>
+        <a class="button btn btn-primary" th:href="@{/service/addService?id={id}(id=${hairSalon.getId()})}">Dodaj
+            usługę</a>
     </div>
     <div th:if="${hairServices.size()!=0}">
         <table class="table table-sm table-bordered table-striped" style="width: 35%">
@@ -33,9 +34,12 @@
                 <td th:text="${temp.getExecutionTime()}"></td>
                 <td th:text="${temp.getServicePrice()}"></td>
                 <td>
-<!--                    <a class="button btn btn-danger" th:href="@{/hairdresser/deleteHairdresser?id={id}(id=${temp.getId()})}">-->
-<!--                        <span class="glyphicon glyphicon-remove"></span>Usuń-->
-<!--                    </a>-->
+                    <a class="button btn btn-danger" th:href="@{/service/delete?id={id}(id=${temp.getId()})}">
+                        <span class="glyphicon glyphicon-remove"></span>Usuń
+                    </a>
+                    <a class="button btn btn-warning" th:href="@{/service/edit?id={id}(id=${temp.getId()})}">
+                        <span class="glyphicon glyphicon-remove"></span>Edytuj
+                    </a>
                 </td>
             </tr>
             </tbody>
