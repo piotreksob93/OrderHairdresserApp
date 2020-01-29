@@ -3,7 +3,7 @@ package com.piotrek.apps.orderHaircutApp.controller;
 import com.piotrek.apps.orderHaircutApp.dao.RoleRepo;
 import com.piotrek.apps.orderHaircutApp.dto.UserDto;
 import com.piotrek.apps.orderHaircutApp.entity.User;
-import com.piotrek.apps.orderHaircutApp.services.UserServiceImplementation;
+import com.piotrek.apps.orderHaircutApp.services.impl.UserServiceImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +19,13 @@ import java.util.Arrays;
 @Controller
 public class RegistrationController {
 
-    private UserServiceImplementation userService;
+    private UserServiceImpl userService;
 
     private RoleRepo roleRepo;
 
     private final BCryptPasswordEncoder passwordEncoder;
 
-    public RegistrationController(UserServiceImplementation userService, RoleRepo roleRepo, BCryptPasswordEncoder passwordEncoder) {
+    public RegistrationController(UserServiceImpl userService, RoleRepo roleRepo, BCryptPasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleRepo = roleRepo;
         this.passwordEncoder = passwordEncoder;

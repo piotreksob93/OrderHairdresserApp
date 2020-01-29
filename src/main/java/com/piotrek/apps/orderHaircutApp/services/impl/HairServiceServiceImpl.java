@@ -1,16 +1,17 @@
-package com.piotrek.apps.orderHaircutApp.services;
+package com.piotrek.apps.orderHaircutApp.services.impl;
 
 import com.piotrek.apps.orderHaircutApp.dao.HairServiceRepo;
 import com.piotrek.apps.orderHaircutApp.dto.HairServiceDto;
 import com.piotrek.apps.orderHaircutApp.entity.HairService;
+import com.piotrek.apps.orderHaircutApp.services.HairServiceService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HairServiceServiceImplementation implements HairServiceService {
+public class HairServiceServiceImpl implements HairServiceService {
 
     private final HairServiceRepo hairServiceRepo;
 
-    public HairServiceServiceImplementation(HairServiceRepo hairServiceRepo) {
+    public HairServiceServiceImpl(HairServiceRepo hairServiceRepo) {
         this.hairServiceRepo = hairServiceRepo;
     }
 
